@@ -36,3 +36,45 @@
     right: 3vw;
     z-index: 1000;
 }
+
+.start-page {
+    width: 100vw;
+    height: 100vh;
+    /* Load ảnh bg1.png làm background */
+    background-image: url('../assets/bg1.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Đảm bảo logo và loading nằm giữa */
+.loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 2;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.main-logo {
+    max-width: 300px; /* Điều chỉnh kích thước logo tùy ý */
+    height: auto;
+}
+
+/* Nút nhạc cố định góc */
+.music-btn-fixed {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}

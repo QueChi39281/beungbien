@@ -4,36 +4,24 @@
 .question-page-container {
     width: 100vw;
     min-height: 100vh; 
-    background-color: #E2F0D9;
+    /* Đổi sang dùng ảnh nền thay vì màu phẳng */
+    background-image: url('../assets/bg1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
-    padding: 0 71px; /* Lề trái và phải cố định 71px */
+    padding: 0 71px; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; 
-    overflow-x: hidden;
+    overflow: hidden; /* Tránh cuộn ngang không cần thiết */
 }
 
-/* --- ĐỊNH VỊ CÁC NÚT ĐIỀU KHIỂN GÓC TRÊN --- */
-
-/* Nút đọc âm thanh góc trên bên phải */
-.read-aloud-btn {
-    position: absolute !important;
-    top: 71px !important;
-    right: 71px !important;
-    width: 140px;
-    height: 140px;
-    z-index: 100;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-/* Bộ đếm câu hỏi góc trên bên phải */
+/* --- BỘ ĐẾM CÂU HỎI (GÓC TRÊN BÊN TRÁI) --- */
 .question-counter {
     position: absolute !important;
     top: 71px !important;
-    right: 71px !important;
+    left: 71px !important; /* Đưa về bên trái theo wireframe */
     width: 200px;
     height: 81px;
     background-color: #ffffff;
@@ -49,40 +37,55 @@
     z-index: 100;
 }
 
-/* --- LAYOUT CHÍNH --- */
+/* --- NÚT ÂM THANH (GÓC TRÊN BÊN PHẢI) --- */
+.read-aloud-btn, .music-btn-fixed {
+    position: absolute !important;
+    top: 71px !important;
+    right: 71px !important; /* Đưa về bên phải để cân bằng */
+    width: 80px;  /* Thu nhỏ lại một chút để tinh tế hơn */
+    height: 80px;
+    z-index: 100;
+    background: #ffffff; /* Thêm nền trắng tròn để nổi bật trên BG */
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
+/* --- LAYOUT CHÍNH --- */
 .main-content-layout {
     display: flex;
     flex: 1;
     align-items: center; 
     justify-content: space-between;
-    gap: 4vw;
-    /* Chừa khoảng trống lớn (220px) để không đè lên nút ReadAloud (140px) */
-    padding-top: 220px; 
-    padding-bottom: 50px;
-    position: relative;
+    gap: 50px;
+    padding-top: 180px; /* Giảm bớt padding top để layout không bị đẩy quá sâu */
+    padding-bottom: 40px;
     z-index: 1;
 }
 
 /* --- CỘT TRÁI: CÂU HỎI & ĐÁP ÁN --- */
 .left-column {
-    flex: 0 0 62%;
+    flex: 1; /* Để cột trái tự co giãn */
+    max-width: 65%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
 }
 
 .question-card {
     background: #ffffff;
     border-radius: 20px;
-    padding: 4vh 3vw;
-    border: 3px solid #00500A;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 35px 40px;
     font-family: 'Baloo 2', cursive;
-    font-size: clamp(22px, 3.5vh, 32px);
+    font-size: 28px; /* Cố định size chữ cho dễ đọc */
     color: #00500A;
     font-weight: 700;
     line-height: 1.4;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .answer-grid {
@@ -93,81 +96,56 @@
 
 /* --- CỘT PHẢI: NHÂN VẬT --- */
 .right-column {
-    flex: 0 0 32%;
-    height: auto; 
-    align-self: flex-end; 
+    flex: 0 0 300px; /* Cố định chiều rộng khung nhân vật */
     display: flex;
     justify-content: center;
+    align-self: flex-end;
 }
 
 .character-frame {
     width: 100%;
-    height: 75vh; 
-    background-color: rgba(255, 255, 255, 0.3);
+    height: 500px; /* Kích thước hợp lý cho nhân vật */
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 25px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    overflow: hidden;
-    /* Sticky giúp nhân vật luôn hiện diện khi nội dung câu hỏi dài phải cuộn */
-    position: sticky; 
-    bottom: 50px;
+    backdrop-filter: blur(5px); /* Hiệu ứng mờ nền sau lưng nhân vật */
 }
 
-/* Hình ảnh nhân vật bên trong StoredCharacter */
-.character-img {
-    max-height: 100%;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    animation: slideUp 0.6s ease-out;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 1200px) {
-    .question-page-container {
-        padding: 0 30px;
-    }
-    .question-counter {
-        right: 30px;
-        width: 150px;
-        font-size: 35px;
-    }
-    .read-aloud-btn {
-        left: 30px;
-        width: 100px;
-        height: 100px;
-    }
-    .main-content-layout {
-        padding-top: 180px;
-    }
-}
-
-
+/* --- NÚT XÁC NHẬN --- */
 .confirm-button {
-    margin-top: 20px;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: bold;
+    width: 100%; /* Nút xác nhận dài bằng khung đáp án */
+    max-width: 400px;
+    margin: 20px auto 0; /* Căn giữa */
+    padding: 15px 0;
+    font-family: 'Baloo 2', cursive;
+    font-size: 24px;
+    font-weight: 800;
     border: none;
-    border-radius: 30px;
-    background-color: #ccc;
+    border-radius: 40px;
+    background-color: #BDBDBD;
     color: white;
     cursor: not-allowed;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
 }
 
 .confirm-button.active {
-    background-color: #ff9800; /* Màu cam nổi bật */
+    background: linear-gradient(180deg, #FF9800 0%, #E65100 100%);
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+    box-shadow: 0 6px 0 #BF360C; /* Hiệu ứng nút 3D */
 }
 
-.confirm-button.active:hover {
-    transform: scale(1.05);
+.confirm-button.active:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #BF360C;
+}
+
+/* Responsive cho màn hình nhỏ hơn */
+@media (max-width: 1024px) {
+    .question-page-container { padding: 0 30px; }
+    .question-counter { left: 30px; top: 30px; width: 140px; font-size: 30px; height: 60px; }
+    .read-aloud-btn { right: 30px; top: 30px; width: 60px; height: 60px; }
+    .left-column { max-width: 100%; }
+    .right-column { display: none; } /* Ẩn nhân vật trên mobile để đỡ chật */
 }

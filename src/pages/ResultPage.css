@@ -1,32 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&display=swap');
 
+/* --- CẤU HÌNH NỀN CHUNG --- */
 .result-page-container {
     width: 100vw;
-    min-height: 100vh; /* Quan trọng: Cho phép trang dài ra hơn màn hình */
-    background-color: #E2F0D9;
-    position: relative;
+    min-height: 100vh;
     padding: 0 71px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    /* Kích hoạt thanh cuộn dọc khi nội dung vượt quá 100vh */
-    overflow-y: auto; 
-    overflow-x: hidden;
+    box-sizing: border-box;
+    /* Thiết lập để ảnh nền phủ kín và không lặp lại */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
 }
 
+/* --- LOGIC LOAD FILE ẢNH THEO KẾT QUẢ --- */
+
+/* BG1 cho Rất tốt */
+.correct-page {
+    background-image: url('../assets/bg1.png');
+}
+
+/* BG2 cho Khá và Tệ */
+.warning-page, .wrong-page {
+    background-image: url('../assets/bg2.png');
+}
+
+/* BG3 cho Nguy hiểm */
+.danger-page {
+    background-image: url('../assets/bg3.png');
+}
+
+/* --- GIỮ NGUYÊN UI LAYOUT --- */
 .result-main-layout {
     display: flex;
     flex: 1;
-    align-items: flex-start; /* Nội dung bắt đầu từ đỉnh, không căn giữa để tránh bị đẩy khi dài */
+    align-items: center;
     justify-content: space-between;
     gap: 40px;
-    padding-top: 170px; /* Chừa khoảng trống cho QuestionCounter */
+    padding-top: 150px;
     padding-bottom: 50px;
 }
 
-/* --- CỘT TRÁI: TEXT & KẾT QUẢ --- */
 .result-left-column {
-    flex: 0 0 62%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -36,106 +54,70 @@
     background: #ffffff;
     border-radius: 20px;
     padding: 30px 40px;
-    border: 2px solid rgba(0, 80, 10, 0.1);
     font-family: 'Baloo 2', cursive;
     font-size: 26px;
-    color: #333;
     font-weight: 700;
-    line-height: 1.5;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Thẻ đáp án với màu động */
 .result-answer-box {
     width: fit-content;
-    padding: 18px 35px;
+    padding: 15px 35px;
     border-radius: 15px;
     font-family: 'Baloo 2', cursive;
     font-size: 22px;
     font-weight: 800;
     color: #ffffff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.result-answer-box.correct { background-color: #00500A; } /* Xanh đậm */
-.result-answer-box.wrong   { background-color: #C00000; } /* Đỏ */
-.result-answer-box.warning { background-color: #FFC000; } /* Vàng */
+/* Màu các box đáp án giữ nguyên */
+.result-answer-box.correct { background-color: #2d5a27; }
+.result-answer-box.warning { background-color: #c48c00; }
+.result-answer-box.wrong   { background-color: #d35400; }
+.result-answer-box.danger  { background-color: #8b1e1e; }
 
-/* Khung giải thích */
 .result-explanation-card {
     background: #ffffff;
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     font-family: 'Baloo 2', cursive;
 }
 
-.explanation-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+.explanation-text {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
 }
 
-.explanation-header .title {
+.next-button {
+    background: #FF8C00;
+    color: white;
+    border: none;
+    padding: 15px 45px;
+    font-family: 'Baloo 2', cursive;
     font-size: 24px;
     font-weight: 800;
-    color: #00500A;
-}
-
-.result-explanation-card .text {
-    font-size: 20px;
-    color: #00500A;
-    font-weight: 500;
-    line-height: 1.6;
-}
-
-/* --- CỘT PHẢI: NHÂN VẬT --- */
-.result-right-column {
-    flex: 0 0 32%;
-    /* Sticky giúp nhân vật không bị mất khi cuộn đọc giải thích dài */
-    position: sticky;
-    top: 170px;
+    border-radius: 50px;
+    cursor: pointer;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 6px 0 #CC7000;
+    width: fit-content;
+}
+
+.result-right-column {
+    flex: 0 0 350px;
 }
 
 .result-character-frame {
     width: 100%;
-    height: 70vh;
-    max-height: 600px;
-    background-color: rgba(255, 255, 255, 0.3);
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 25px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    overflow: hidden;
-}
-
-/* Tùy chỉnh thanh cuộn cho đẹp hơn (Chrome/Safari) */
-.result-page-container::-webkit-scrollbar {
-    width: 8px;
-}
-.result-page-container::-webkit-scrollbar-track {
-    background: #E2F0D9;
-}
-.result-page-container::-webkit-scrollbar-thumb {
-    background: #00500A;
-    border-radius: 10px;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 1100px) {
-    .result-main-layout {
-        flex-direction: column;
-        align-items: center;
-    }
-    .result-left-column, .result-right-column {
-        flex: 1 0 100%;
-        width: 100%;
-    }
-    .result-right-column {
-        position: relative;
-        top: 0;
-        height: 350px;
-    }
+    backdrop-filter: blur(5px); /* Hiệu ứng mờ nhẹ để nhân vật nổi bật trên ảnh nền */
 }

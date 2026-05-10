@@ -2,6 +2,7 @@ export const parseScenarioStream = async (response) => {
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let accumulatedData = "";
+    const scenarios = [];
 
     while (true) {
         const { value, done } = await reader.read();
@@ -9,34 +10,40 @@ export const parseScenarioStream = async (response) => {
         accumulatedData += decoder.decode(value, { stream: true });
     }
 
-    console.log("Dữ liệu thô nhận được:", accumulatedData);
+    console.log("Dữ liệu thô từ Server:", accumulatedData);
 
     try {
-        // 1. Dùng Regex để tìm nội dung nằm sau chữ 'data:' 
-        // Nó sẽ lấy từ dấu '{' cho đến hết chuỗi hoặc đến dấu xuống dòng tiếp theo
-        const match = accumulatedData.match(/data:\s*({[\s\S]*})/);
+        // 1. Tách chuỗi theo chữ "data:" để tìm các khối JSON riêng biệt
+        const parts = accumulatedData.split("data:");
 
-        if (match && match[1]) {
-            const jsonStr = match[1].trim();
-            const parsed = JSON.parse(jsonStr);
-
-            // Kiểm tra xem có đúng là object có câu hỏi không
-            if (parsed && parsed.question) {
-                console.log("✅ Đã bóc tách JSON thành công:", parsed);
-                return parsed;
+        parts.forEach(part => {
+            const trimmedPart = part.trim();
+            // Kiểm tra xem phần này có chứa nội dung JSON không (bắt đầu bằng {)
+            if (trimmedPart.startsWith("{")) {
+                try {
+                    // Trích xuất JSON bằng cách tìm cặp ngoặc nhọn {} gần nhất
+                    const jsonMatch = trimmedPart.match(/{[\s\S]*}/);
+                    if (jsonMatch) {
+                        const parsed = JSON.parse(jsonMatch[0]);
+                        // Chỉ thêm vào mảng nếu là object có câu hỏi (loại bỏ event done)
+                        if (parsed && parsed.question) {
+                            scenarios.push(parsed);
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Bỏ qua một khối dữ liệu lỗi:", e);
+                }
             }
-        }
-        
-        // 2. Nếu cách trên thất bại, thử tìm mọi thứ trong cặp dấu ngoặc nhọn {}
-        const fallbackMatch = accumulatedData.match(/{[\s\S]*}/);
-        if (fallbackMatch) {
-            const parsed = JSON.parse(fallbackMatch[0]);
-            return parsed;
+        });
+
+        if (scenarios.length > 0) {
+            console.log(`✅ Đã bóc tách thành công ${scenarios.length} câu hỏi.`);
+            return scenarios; // Trả về mảng các câu hỏi
         }
 
         return null;
     } catch (error) {
-        console.error("❌ Lỗi parse JSON:", error);
+        console.error("❌ Lỗi hệ thống khi parse stream:", error);
         return null;
     }
 };
