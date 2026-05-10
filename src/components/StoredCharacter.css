@@ -1,0 +1,47 @@
+/* Container bọc ngoài nhân vật */
+.character-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Căn giữa nhân vật theo chiều ngang */
+    align-items: flex-end;    /* Quan trọng: Để chân nhân vật luôn chạm đáy khung hình */
+    overflow: hidden;         /* Đảm bảo không bị tràn nếu ảnh quá to */
+    position: relative;
+}
+
+/* Style cho hình ảnh nhân vật */
+.character-img {
+    /* Đảm bảo chiều cao tối đa không vượt quá khung cha (ví dụ khung xám 70vh) */
+    max-height: 95%; 
+    width: auto;      /* Giữ nguyên tỷ lệ chiều rộng theo chiều cao */
+    object-fit: contain;
+    
+    /* Hiệu ứng mượt khi chuyển đổi nhân vật hoặc lúc mới hiện ra */
+    transition: all 0.3s ease-in-out;
+    animation: slideUp 0.6s ease-out;
+}
+
+/* Hiệu ứng nhân vật trồi lên từ dưới khi trang vừa load */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*thêm một lớp bóng đổ dưới chân nhân vật cho thật hơn */
+.character-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 60%;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    filter: blur(5px);
+    z-index: -1; /* Nằm dưới ảnh nhân vật */
+}

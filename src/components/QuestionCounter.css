@@ -1,0 +1,27 @@
+.question-counter {
+    /* Kích thước và vị trí */
+    position: absolute;
+    top: 71px;
+    left: 71px;
+    width: 200px;
+    height: 81px;
+
+    /* Nền và bo góc */
+    background-color: #ffffff;
+    border-radius: 20px; /* Bo tròn 20 góc */
+    
+    /* Căn lề chữ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Kiểu chữ */
+    font-family: 'Baloo 2', cursive; /* Đảm bảo đã import font này ở App.css hoặc index.html */
+    font-size: 50px;
+    color: #00500A;
+    font-weight: bold; /* Nét đậm */
+    
+    /* Tùy chọn: Thêm shadow nhẹ để nổi bật trên nền xanh */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}

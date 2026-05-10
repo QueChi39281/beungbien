@@ -1,0 +1,40 @@
+.music-btn-container {
+    position: fixed;
+    /* Sử dụng vh/vw để nút luôn nằm đúng góc bất kể màn hình to nhỏ */
+    top: 3vh; 
+    right: 3vw;
+    z-index: 1000;
+}
+
+.music-toggle-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.music-icon-img {
+    /* Điều chỉnh lại kích thước cho cân đối với nút tròn 10vh bên dưới */
+    width: 10vh; 
+    height: 10vh;
+    object-fit: contain;
+}
+
+.music-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+.status-text {
+    /* Đồng bộ font Baloo và màu xanh 00500A của hệ thống */
+    font-family: 'Baloo 2', cursive;
+    font-size: 2vh; 
+    font-weight: 700;
+    color: #00500A;
+    margin-top: 0.5vh;
+    text-transform: uppercase;
+}

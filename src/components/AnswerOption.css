@@ -1,0 +1,38 @@
+.answer-option {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent; /* Tránh nhảy khung khi thêm viền */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.answer-option:hover {
+    transform: translateY(-3px);
+    border-color: #76B900;
+}
+
+/* Khi được chọn */
+.answer-option.selected {
+    background-color: #00500A !important;
+    border-color: #00500A;
+}
+
+.answer-option.selected .answer-text {
+    color: #ffffff !important;
+}
+
+.answer-text {
+    font-family: 'Baloo 2', cursive;
+    font-size: 22px;
+    font-weight: 700;
+    color: #00500A;
+    margin: 0;
+    text-align: center;
+    line-height: 1.3;
+}

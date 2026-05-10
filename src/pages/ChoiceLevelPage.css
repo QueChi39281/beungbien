@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&display=swap');
+
+.choice-level-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #E2F0D9;
+    padding: 0 71px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.level-selection-area {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 60px;
+    font-weight: 800;
+    color: #00500A;
+    margin: 0;
+}
+
+.levels-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 600px;
+}
+
+.level-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 5px solid #00500A;
+    
+    font-family: 'Baloo 2', cursive;
+    font-size: 35px;
+    font-weight: 700;
+    color: #00500A;
+    
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.level-circle:hover {
+    transform: scale(1.1);
+    background-color: #f0fff0;
+}
+
+/* Khi level được chọn */
+.level-circle.active {
+    background-color: #00500A;
+    color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 80, 10, 0.4);
+}
+
+.character-display {
+    flex: 0 0 32%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.character-frame {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+/* Animation cho các nút hiện ra lần lượt */
+.level-circle {
+    animation: popIn 0.5s ease backwards;
+}
+
+.level-circle:nth-child(1) { animation-delay: 0.1s; }
+.level-circle:nth-child(2) { animation-delay: 0.2s; }
+.level-circle:nth-child(3) { animation-delay: 0.3s; }
+.level-circle:nth-child(4) { animation-delay: 0.4s; }
+.level-circle:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Hiệu ứng màn hình chờ */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(144, 240, 160, 0.95); /* Màu nền xanh đặc trưng của má */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Luôn nằm trên cùng */
+}
+
+.loading-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-logo-spin {
+    width: 200px;
+    height: auto;
+    animation: bounce 1.5s infinite ease-in-out; /* Hiệu ứng logo nảy nảy cho vui */
+}
+
+.loading-text {
+    margin-top: 20px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 24px;
+    color: #00500A;
+    font-weight: bold;
+}
+
+/* Hiệu ứng nảy nảy cho Logo */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+}
+
+/* Khóa nút khi đang load */
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}

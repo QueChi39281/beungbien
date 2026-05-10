@@ -1,0 +1,12 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #90f0a0; /* Hoặc màu nền bạn muốn */
+}
+#root {
+  display: block !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

@@ -1,0 +1,135 @@
+/* Container chính */
+.summary-page-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #90f0a0; /* Màu xanh nền của má */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Baloo 2', cursive;
+    margin: 0;
+    padding: 0;
+}
+
+.summary-main-layout {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Cột bên trái */
+.summary-left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.score-title {
+    color: #00500A;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.score-card {
+    background: white;
+    width: 180px;
+    height: 90px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 0 rgba(0,0,0,0.1);
+}
+
+.score-number {
+    font-size: 60px;
+    font-weight: 800;
+    color: #00500A;
+}
+
+.summary-content-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 30px;
+    border: 3px solid #ffffff;
+}
+
+.summary-lvl-title {
+    font-size: 28px;
+    color: #00500A;
+    margin-top: 0;
+}
+
+.summary-text {
+    font-size: 20px;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* Nút Chơi tiếp - ÉP FONT TẠI ĐÂY */
+.play-next-btn {
+    background-color: #FFD600; /* Màu vàng cho nổi */
+    color: #00500A;
+    border: none;
+    padding: 15px 40px;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Baloo 2', cursive !important; /* Quan trọng nhất */
+    box-shadow: 0 6px 0 #CCAC00;
+    transition: all 0.2s;
+}
+
+.play-next-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #CCAC00;
+}
+
+.play-next-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #CCAC00;
+}
+
+/* Cột bên phải (Nhân vật) */
+.summary-right-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+    /* Chắc chắn nó không bao giờ phình to hơn 50% chiều rộng layout */
+    max-width: 50%;
+}
+
+
+.summary-character-frame {
+    /* Ép khung này chỉ được rộng tối đa bao nhiêu đây thôi */
+    /* Nếu vẫn to, má GIẢM con số 220px này xuống (ví dụ 180px) */
+    width: 220px; 
+    
+    /* Đảm bảo chiều cao tự động theo ảnh */
+    height: auto;
+    
+    /* Căn giữa bản thân cái khung này trong cột */
+    margin: 0 auto;
+    
+    /* Ngăn chặn mọi sự phình to ngoài ý muốn */
+    flex-shrink: 0; 
+}
+
+.summary-character-frame img {
+    /* Ảnh luôn rộng bằng 100% cái khung 220px ở trên */
+    width: 100% !important; 
+    
+    /* Chiều cao tự cân đối để không bị méo */
+    height: auto !important; 
+    
+    /* Nếu ảnh bị nền xám, có thể dùng thuộc tính này để ép tệp nền (tùy ảnh) */
+    /* mix-blend-mode: multiply; */
+}

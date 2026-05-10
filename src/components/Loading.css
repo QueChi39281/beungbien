@@ -1,0 +1,23 @@
+.loading-container {
+    /* Đổi width sang đơn vị linh hoạt để không bị vỡ trên màn hình nhỏ */
+    width: clamp(300px, 40vw, 508px); 
+    height: 4.5vh; /* Cao khoảng 4.5% màn hình */
+    background-color: #ffffff;
+    border-radius: 25px;
+    
+    /* QUAN TRỌNG: Xóa margin 591px cũ, để Flexbox của StartPage tự tính toán */
+    margin: 0 auto; 
+    
+    overflow: hidden;
+    border: 0.4vh solid #00500A; /* Viền xanh cho đồng bộ Form */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.loading-bar {
+    height: 100%;
+    background: linear-gradient(to right, #00500A, #FFCD00);
+    /* Giữ dải màu cố định để không bị nén khi thanh chạy */
+    background-size: 508px 100%; 
+    border-radius: 25px;
+    transition: width 0.1s linear;
+}
